@@ -4,7 +4,7 @@ This repository contains various projects and files related to different topics.
 
 ## Branches and Directories
 
-### AULA 2 - ENTREGA (LINK DO REP. GIT) - ROTAS  (Cars)
+### AULA 2 - ENTREGA (LINK DO REP. GIT) - ROTAS  
 - Date: 04-10-2023
 - Description: Traballo em angular.
 - [Link Directory](https://github.com/Guilherme-Denarde/Trabalhos_Facu/tree/carros+livros_angular)
