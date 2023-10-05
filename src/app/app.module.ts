@@ -26,7 +26,7 @@ import { LivrosComponent } from './layout/livros/livros.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
