@@ -9,8 +9,8 @@ import { PessoaslistComponent } from './pessoas/pessoaslist/pessoaslist.componen
 import { FooterComponent } from './layout/footer/footer.component';
 import { PessoasdetailsComponent } from './pessoas/pessoasdetails/pessoasdetails.component';
 import { LoginComponent } from './sistema/login/login.component';
-import { CarrosComponent } from './layout/carros/carros.component';
-import { LivrosComponent } from './layout/livros/livros.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,13 +20,13 @@ import { LivrosComponent } from './layout/livros/livros.component';
     PessoaslistComponent,
     FooterComponent,
     PessoasdetailsComponent,
-    LoginComponent,
-    CarrosComponent,
-    LivrosComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
