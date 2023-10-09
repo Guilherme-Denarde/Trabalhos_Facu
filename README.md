@@ -1,15 +1,22 @@
 # My GitHub Repository
 
-This repository contains various projects and files related to different topics.
+This repository contains various projects and files related to different topics.\
+Example:\
+git clone git@github.com:Guilherme-Denarde/Trabalhos_Facu.git \
+cd Trabalhos_Facu\
+git branch -a\
+git checkout [BRANCH NAME]
 
 ## Branches and Directories
 
 ### AULA 3 - BINDING E MODAL - (SALVAR E ALTERAR) 
+- Branch name: cadastro_c_carro_livro_pessoas_angular
 - Date: 08-10-2023
 - Description: Traballo em angular.
 - [Link Directory](https://github.com/Guilherme-Denarde/Trabalhos_Facu/tree/cadastro_c_carro_livro_pessoas_angular)
 
 ### AULA 2 - ENTREGA - ROTAS  
+- Branch name: carros+livros_angular
 - Date: 04-10-2023
 - Description: Traballo em angular.
 - [Link Directory](https://github.com/Guilherme-Denarde/Trabalhos_Facu/tree/carros+livros_angular)
