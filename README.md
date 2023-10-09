@@ -4,7 +4,12 @@ This repository contains various projects and files related to different topics.
 
 ## Branches and Directories
 
-### AULA 2 - ENTREGA (LINK DO REP. GIT) - ROTAS  
+### AULA 3 - BINDING E MODAL - (SALVAR E ALTERAR) 
+- Date: 08-10-2023
+- Description: Traballo em angular.
+- [Link Directory](https://github.com/Guilherme-Denarde/Trabalhos_Facu/tree/cadastro_c_carro_livro_pessoas_angular)
+
+### AULA 2 - ENTREGA - ROTAS  
 - Date: 04-10-2023
 - Description: Traballo em angular.
 - [Link Directory](https://github.com/Guilherme-Denarde/Trabalhos_Facu/tree/carros+livros_angular)
