@@ -6,6 +6,7 @@ import { PessoaslistComponent } from './pessoas/pessoaslist/pessoaslist.componen
 import { PessoasdetailsComponent } from './pessoas/pessoasdetails/pessoasdetails.component';
 import { NotFoundComponent } from './layout/not-found/not-found.component';
 import { CarrosComponent } from './layout/carros/carros.component';
+import { BooksComponent } from './layout/books/books.component';
 
 const routes: Routes = [
   { path: "", redirectTo: "login", pathMatch: 'full' },
@@ -15,6 +16,7 @@ const routes: Routes = [
     { path: "pessoas/novo", component: PessoasdetailsComponent},
     { path: "pessoas/editar/:id", component: PessoasdetailsComponent},
     { path: "carro", component: CarrosComponent },
+    { path: "books", component: BooksComponent },
   ]},
   { path: "**", component: NotFoundComponent },
 

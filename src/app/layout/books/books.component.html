@@ -1,0 +1,39 @@
+<div class="container">
+    <h1>Books</h1>
+    <div class="input-section">
+      <input class="books-input" [(ngModel)]="newBookTitle" placeholder="Book Title" (keyup.enter)="createBook()" />
+      <input class="books-input" [(ngModel)]="newBookAuthor" placeholder="Author" (keyup.enter)="createBook()" />
+      <button (click)="createBook()" class="add-button">Add Book</button>
+    </div>
+    <table class="books-table">
+      <thead>
+        <tr>
+          <th>Book Title</th>
+          <th>Author</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let book of books">
+          <td>{{ book.title }}</td>
+          <td>{{ book.author }}</td>
+          <td>
+            <button (click)="openUpdatePopup(book)" class="action-button">Update</button>
+            <button (click)="deleteBook(book.id)" class="action-button">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="popup" [class.show]="showPopup">
+      <div class="popup-content">
+        <h2>Update Book</h2>
+        <input class="books-input" [(ngModel)]="updatedBookTitle" placeholder="New Book Title" />
+        <input class="books-input" [(ngModel)]="updatedBookAuthor" placeholder="Author" />
+        <div class="popup-buttons">
+          <button (click)="updateBook()" class="update-button">Update</button>
+          <button (click)="cancelUpdate()" class="cancel-button">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

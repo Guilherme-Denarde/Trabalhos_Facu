@@ -13,7 +13,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { NotFoundComponent } from './layout/not-found/not-found.component';
 import { CarrosComponent } from './layout/carros/carros.component';
-import { LivrosComponent } from './layout/livros/livros.component';
+import { BooksComponent } from './layout/books/books.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +26,7 @@ import { LivrosComponent } from './layout/livros/livros.component';
     LoginComponent,
     NotFoundComponent,
     CarrosComponent,
-    LivrosComponent,
+    BooksComponent,
   ],
   imports: [
     BrowserModule,
