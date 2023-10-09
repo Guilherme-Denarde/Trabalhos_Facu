@@ -1,0 +1,38 @@
+<div class="container">
+  <h1>Carros</h1>
+  <div class="input-section">
+    <input class="carros-input" [(ngModel)]="newCarroName" placeholder="Carro Name" (keyup.enter)="createCarro()" />
+    <input type="number" class="carros-input" [(ngModel)]="newCarroYear" placeholder="Year" (keyup.enter)="createCarro()" />
+    <button (click)="createCarro()" class="add-button">Add Carro</button>
+  </div>
+  <table class="carros-table">
+    <thead>
+      <tr>
+        <th>Carro Name</th>
+        <th>Year</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let carro of carros">
+        <td>{{ carro.name }}</td>
+        <td>{{ carro.year }}</td>
+        <td>
+          <button (click)="openUpdatePopup(carro)" class="action-button">Update</button>
+          <button (click)="deleteCarro(carro.id)" class="action-button">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="popup" [class.show]="showPopup">
+    <div class="popup-content">
+      <h2>Update Carro</h2>
+      <input class="carros-input" [(ngModel)]="updatedCarroName" placeholder="New Carro Name" />
+      <input type="number" class="carros-input" [(ngModel)]="updatedCarroYear" placeholder="Year" />
+      <div class="popup-buttons">
+        <button (click)="updateCarro()" class="update-button">Update</button>
+        <button (click)="cancelUpdate()" class="cancel-button">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>

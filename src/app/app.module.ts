@@ -11,6 +11,9 @@ import { PessoasdetailsComponent } from './pessoas/pessoasdetails/pessoasdetails
 import { LoginComponent } from './sistema/login/login.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
+import { NotFoundComponent } from './layout/not-found/not-found.component';
+import { CarrosComponent } from './layout/carros/carros.component';
+import { LivrosComponent } from './layout/livros/livros.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,10 @@ import { FormsModule } from '@angular/forms';
     PessoaslistComponent,
     FooterComponent,
     PessoasdetailsComponent,
-    LoginComponent
+    LoginComponent,
+    NotFoundComponent,
+    CarrosComponent,
+    LivrosComponent,
   ],
   imports: [
     BrowserModule,
