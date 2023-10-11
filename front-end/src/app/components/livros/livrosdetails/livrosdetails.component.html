@@ -1,1 +1,12 @@
-<p>livrosdetails works!</p>
+<form (ngSubmit)="salvar()">
+    <div class="mb-3">
+        <label for="inputTitulo" class="form-label">Título:</label>
+        <input type="text" class="form-control" id="inputTitulo" name="inputTitulo" aria-describedby="tituloHelp"
+            [(ngModel)]="livro.titulo">
+    </div>
+    <div class="mb-3">
+        <label for="inputAutor" class="form-label">Autor:</label>
+        <input type="text" class="form-control" id="inputAutor" name="inputAutor" [(ngModel)]="livro.autor">
+    </div>
+    <button type="submit" class="btn btn-primary">Salvar</button>
+</form>

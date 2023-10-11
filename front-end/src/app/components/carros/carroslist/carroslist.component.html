@@ -34,7 +34,7 @@
         <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
-
+        <app-carrosdetails [carro]="carroSelecionadoParaEdicao" (retorno)="addOuEditarCarro($event)"></app-carrosdetails>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>

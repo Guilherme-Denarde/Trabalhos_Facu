@@ -1,1 +1,12 @@
-<p>carrosdetails works!</p>
+<form (ngSubmit)="salvar()">
+    <div class="mb-3">
+        <label for="inputMarca" class="form-label">Marca:</label>
+        <input type="text" class="form-control" name="inputMarca" aria-describedby="marcaHelp"
+            [(ngModel)]="carro.marca">
+    </div>
+    <div class="mb-3">
+        <label for="inputAno" class="form-label">Ano:</label>
+        <input type="number" class="form-control" name="inputAno" [(ngModel)]="carro.ano">
+    </div>
+    <button type="submit" class="btn btn-primary">Salvar</button>
+</form>
