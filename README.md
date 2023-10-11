@@ -10,11 +10,11 @@ git checkout [BRANCH NAME]
 ## Branches and Directories
 
 ### Aulas 4 e 5 - Atividade (CRUD FULLSTACK: CARROS, LIVROS E PESSOAS)  
-- Branch name: ja coloco
+- Branch name: crud_fullstack_carros_livros_pessoas 
 - Date: 11-10-2023
 - Description: Traballo em angular.
 - Collaborator: Gabriel Kuhnen
-- [Link Directory](https://github.com/Guilherme-Denarde/Trabalhos_Facu/tree/cadastro_c_carro_livro_pessoas_angular)
+- [Link Directory](https://github.com/Guilherme-Denarde/Trabalhos_Facu/tree/crud_fullstack_carros_livros_pessoas)
 
 ### AULA 3 - BINDING E MODAL - (SALVAR E ALTERAR) 
 - Branch name: cadastro_c_carro_livro_pessoas_angular
