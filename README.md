@@ -3,7 +3,7 @@
 This repository contains various projects and files related to different topics.\
 Example:\
 git clone git@github.com:Guilherme-Denarde/Trabalhos_Facu.git \
-cd Trabalhos_Facu\
+cd [dir]\
 git branch -a\
 git checkout [BRANCH NAME]
 
