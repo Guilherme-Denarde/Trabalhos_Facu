@@ -3,17 +3,22 @@
 This repository contains various projects and files related to different topics.\
 Example:\
 git clone git@github.com:Guilherme-Denarde/Trabalhos_Facu.git \
-cd [dir]\
 git branch -a\
 git checkout [BRANCH NAME]
 
 ## Branches and Directories
 
+### Spring security (Java sec)  
+- Branch name: java-securiry-routes
+- Date: 09-11-2023
+- Description: Spring security inplemented on a login page.
+- [Link Directory](https://github.com/Guilherme-Denarde/Trabalhos_Facu/tree/java-securiry-routes)
+
 ### Aulas 4 e 5 - Atividade (CRUD FULLSTACK: CARROS, LIVROS E PESSOAS)  
 - Branch name: crud_fullstack_carros_livros_pessoas 
 - Date: 11-10-2023
 - Description: Traballo em angular.
-- Collaborator: Gabriel Kuhnen
+- Collaborator: [Gabriel Kuhnen](https://github.com/Kript0n007)
 - [Link Directory](https://github.com/Guilherme-Denarde/Trabalhos_Facu/tree/crud_fullstack_carros_livros_pessoas)
 
 ### AULA 3 - BINDING E MODAL - (SALVAR E ALTERAR) 
