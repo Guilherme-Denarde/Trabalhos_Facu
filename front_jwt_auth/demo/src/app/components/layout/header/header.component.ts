@@ -8,8 +8,23 @@ import { jwtDecode } from 'jwt-decode';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
- 
-  token = jwtDecode(localStorage.getItem('authToken') as string);
-  
+  roteador = inject(Router);
 
+  constructor(private router:Router) {}
+  
+  token = jwtDecode(localStorage.getItem('authToken') as string);
+    
+  getUserRole(): string {
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      const decodedToken = jwtDecode(token) as any; 
+      return decodedToken.role;
+    }
+    return '';
+  }
+
+  logout(): void {
+    localStorage.removeItem('authToken');
+    this.router.navigate(['/login']); 
+  }
 }

@@ -7,13 +7,13 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/admin/produtos">Produtos</a>
+            <a class="nav-link active" *ngIf="getUserRole() === 'ADMIN'" aria-current="page" href="/admin/produtos">Produtos</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" *ngIf="token " aria-current="page" href="/admin/pedidos">Pedidos</a>
+            <a class="nav-link active" *ngIf="getUserRole() === 'USER'" aria-current="page" href="/user/pedidos">Pedidos</a>
           </li>
           <li class="nav-item" >
-            <a class="nav-link" aria-current="page" href="#" >Sair</a>
+            <a class="nav-link"  ng aria-current="page" href="#" (click)="logout()">Sair</a>
           </li>
         </ul>
       </div>
