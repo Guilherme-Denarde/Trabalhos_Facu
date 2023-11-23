@@ -31,7 +31,7 @@ export class LoginComponent {
     this.loginService.logar(this.login).subscribe({
       next: (response) => {
         localStorage.setItem('authToken', response.token); 
-        this.router.navigate(['admin/produtos']);
+        this.router.navigate(['/home']);
         console.log('Token: ',response.token);
         
       },

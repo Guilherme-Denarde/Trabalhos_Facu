@@ -14,6 +14,7 @@ import { PedidosdetailsComponent } from './components/pedidos/pedidosdetails/ped
 import { ProdutoslistComponent } from './components/produtos/produtoslist/produtoslist.component';
 import { ProdutosdetailsComponent } from './components/produtos/produtosdetails/produtosdetails.component';
 import { Router, RouterModule } from '@angular/router';
+import { HomeComponent } from './components/layout/home/home.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { Router, RouterModule } from '@angular/router';
     PedidoslistComponent,
     PedidosdetailsComponent,
     ProdutoslistComponent,
-    ProdutosdetailsComponent
+    ProdutosdetailsComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +38,7 @@ import { Router, RouterModule } from '@angular/router';
     RouterModule
   ],
   providers: [
-    //colocar LoginService e o Interceptor aqui
+    //colocar LoginService e o Interceptor aqui gui-humm, nop
   ],
   bootstrap: [AppComponent]
 })
