@@ -1,0 +1,48 @@
+<div class="container">
+    <h3 class="alert alert-primary">Listagem de produtos!</h3>
+     <button type="button" class="btn btn-primary" (click)="adicionar(modal1)">Adicionar</button> 
+    <div class="row">
+        <div class="col-lg-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#ID</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Idade</th>
+                        <th scope="col">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let produto of lista; let i = index">
+                        <th scope="row">{{ produto.id }}</th>
+                        <td> {{ produto.nome }} </td>
+                        <td> {{ produto.valor | number:'1.2-2' }} </td>
+                        <td *ngIf="!modoLancamento" > <button type="button" class="btn btn-primary" (click)="editar(modal1, produto, i)">Editar</button> </td>
+                        <td *ngIf="modoLancamento" > <button type="button" class="btn btn-primary" (click)="lancamento( produto)">Lançar</button> </td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<ng-template #modal1 let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Modal title</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+       
+        <app-produtosdetails [produto]="objetoSelecionadoParaEdicao" (retorno)="addOuEditarProduto($event)" ></app-produtosdetails>
+        
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+</ng-template>
