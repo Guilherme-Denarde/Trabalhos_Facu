@@ -8,6 +8,12 @@ git checkout [BRANCH NAME]
 
 ## Branches and Directories
 
+### AULA TESTES (Jasmine & Karma)  
+- Branch name: java-jwt-angular
+- Date: 11-23-2023
+- Description: Jasmine and Karma for front-end testing.
+- [Link Directory](https://github.com/Guilherme-Denarde/Trabalhos_Facu/tree/java-jwt-angular)
+
 ### Spring security (Java sec)  
 - Branch name: java-securiry-routes
 - Date: 09-11-2023
