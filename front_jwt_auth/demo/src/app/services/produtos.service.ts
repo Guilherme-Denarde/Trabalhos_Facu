@@ -25,7 +25,7 @@ export class ProdutosService {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-    return this.http.post<Produto>('your-api-endpoint', produto, { headers });
+    return this.http.post<Produto>(this.API, produto, { headers });
   }
 
   exemploErro(): Observable<Produto[]> {
