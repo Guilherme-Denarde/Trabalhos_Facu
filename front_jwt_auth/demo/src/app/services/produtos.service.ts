@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Produto } from '../models/produto';
 
@@ -14,12 +14,18 @@ export class ProdutosService {
   constructor() { }
 
 
-  listAll(): Observable<Produto[]> {
-    return this.http.get<Produto[]>(this.API);
+  listAll(token: string): Observable<Produto[]> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get<Produto[]>(this.API, { headers });
   }
 
-  save(produto: Produto): Observable<Produto> {
-    return this.http.post<Produto>(this.API, produto);
+  save(produto: Produto, token: string): Observable<Produto> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.post<Produto>('your-api-endpoint', produto, { headers });
   }
 
   exemploErro(): Observable<Produto[]> {

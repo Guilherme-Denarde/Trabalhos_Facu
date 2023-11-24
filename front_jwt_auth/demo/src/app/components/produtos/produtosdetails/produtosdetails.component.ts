@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { Produto } from 'src/app/models/produto';
 import { ProdutosService } from 'src/app/services/produtos.service';
 
@@ -7,36 +7,36 @@ import { ProdutosService } from 'src/app/services/produtos.service';
   templateUrl: './produtosdetails.component.html',
   styleUrls: ['./produtosdetails.component.scss']
 })
-export class ProdutosdetailsComponent {
+export class ProdutosdetailsComponent implements OnInit {
 
   @Input() produto: Produto = new Produto();
   @Output() retorno = new EventEmitter<Produto>();
 
-  produtosService = inject(ProdutosService);
+  private produtosService: ProdutosService;
 
+  constructor(produtosService: ProdutosService) {
+    this.produtosService = produtosService;
+  }
 
-  constructor() {
-
+  ngOnInit(): void {
+    // Initialization logic if needed
   }
 
   salvar() {
+    const token = localStorage.getItem('authToken');
+    if (!token) {
+      console.error('No token found');
+      return;
+    }
 
-    //ISSO AQUI SERVE PARA EDITAR OU ADICIONAR... TANTO FAZ
-    this.produtosService.save(this.produto).subscribe({
-      next: produto => { // QUANDO DÁ CERTO
+    this.produtosService.save(this.produto, token).subscribe({
+      next: produto => { 
         this.retorno.emit(produto);
       },
-      error: erro => { // QUANDO DÁ ERRO
-        console.log('Erro! XD');
-
+      error: erro => {
         alert('Exemplo de tratamento de erro/exception! Observe o erro no console!');
         console.error(erro);
       }
     });
-
-
-
   }
-
 }
-

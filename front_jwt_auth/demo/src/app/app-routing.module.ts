@@ -5,12 +5,10 @@ import { IndexComponent } from './components/layout/index/index.component';
 import { ProdutoslistComponent } from './components/produtos/produtoslist/produtoslist.component';
 import { PedidoslistComponent } from './components/pedidos/pedidoslist/pedidoslist.component';
 import { AuthGuard } from './guards/auth.guard'; 
-import { HomeComponent } from './components/layout/home/home.component';
 
 const routes: Routes = [
   { path: "", redirectTo: "login", pathMatch: 'full' },
   { path: "login", component: LoginComponent },
-  { path: "home", component:  HomeComponent},
   {
     path: "admin", 
     canActivate: [AuthGuard], 

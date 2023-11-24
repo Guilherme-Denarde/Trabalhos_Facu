@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Login } from 'src/app/models/login';
 import { Loginservice } from 'src/app/services/login/loginservice.service';
+import { jwtDecode } from 'jwt-decode'; 
 
 @Component({
   selector: 'app-login',
@@ -15,30 +16,38 @@ export class LoginComponent {
 
   constructor(
     private loginService: Loginservice,
-    private router:Router
-    ) {}
-
-  // logar() {
-  //   if (this.login.username == 'admin' && this.login.password == 'admin') {
-  //     localStorage.setItem('authToken', 'eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiYWRtaW5cbiIsIm91dHJhY29pc2EiOiJ0ZXN0ZSIsImlkIjoiMSIsInVzZXJuYW1lIjoiYWRtaW4iLCJzdWIiOiJhZG1pbiIsImlhdCI6MTcwMDY5NDE0MywiZXhwIjoxNzAwNjk3NzQzfQ.Q0C90dXmS7gaA8kAYwwd8P6f8vTtCMrq69ezjlUfI8o');
-  //     this.roteador.navigate(['admin/produtos']);
-  //   } else {
-  //     alert('login ou senha incorretos');
-  //   }
-  // }
+    private router: Router
+  ) {}
 
   logar() {
     this.loginService.logar(this.login).subscribe({
       next: (response) => {
-        localStorage.setItem('authToken', response.token); 
-        this.router.navigate(['/home']);
-        console.log('Token: ',response.token);
         
+        localStorage.setItem('authToken', response.token);
+        console.log(response.token);
+        this.navigateBasedOnRole(response.token);
       },
       error: (error) => {
         console.error('Login failed:', error);
         alert('Login ou senha incorretos');
       }
     });
+  }
+
+  private navigateBasedOnRole(token: string) {
+    try {
+      const decodedToken = jwtDecode(token) as any; 
+      const userRole = decodedToken.role;
+
+      if (userRole === 'ADMIN') {
+        this.router.navigate(['/admin/produtos']);
+      } else if (userRole === 'USER') {
+        this.router.navigate(['/usuario/pedidos']);
+      } else {
+        this.router.navigate(['/']);
+      }
+    } catch (error) {
+      console.error('Error decoding token:', error);
+    }
   }
 }
