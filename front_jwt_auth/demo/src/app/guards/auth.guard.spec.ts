@@ -6,7 +6,6 @@ import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('AuthGuard', () => {
   let guard = TestBed.inject(AuthGuard);
-// const guard = new AuthGuard;
   let router: Router;
 
   beforeEach(() => {

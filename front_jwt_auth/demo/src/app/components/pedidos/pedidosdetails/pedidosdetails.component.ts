@@ -32,7 +32,14 @@ export class PedidosdetailsComponent {
     }
 
     this.pedidosService.save(this.pedido, token).subscribe({
-      // ... Response handling ...
+      next: (response) => {
+        console.log('Pedido saved successfully', response);
+        this.retorno.emit(response); 
+      },
+      error: (error) => {
+        console.error('Error saving pedido', error);
+        alert('Error saving pedido');
+      }
     });
   }
 

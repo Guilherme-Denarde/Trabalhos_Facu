@@ -21,9 +21,7 @@ export class AuthGuard implements CanActivate {
       const decodedToken = jwtDecode(token) as any;
       const userRole = decodedToken.role;
 
-      // Check if route is restricted by role
       if (route.data['roles'] && route.data['roles'].indexOf(userRole) === -1) {
-        // Role not authorised so redirect to home page
         this.router.navigate(['/']);
         return false;
       }

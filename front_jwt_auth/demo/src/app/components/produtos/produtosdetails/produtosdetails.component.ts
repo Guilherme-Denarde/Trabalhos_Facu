@@ -19,7 +19,6 @@ export class ProdutosdetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Initialization logic if needed
   }
 
   salvar() {

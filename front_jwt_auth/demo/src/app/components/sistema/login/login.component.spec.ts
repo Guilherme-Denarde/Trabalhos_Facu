@@ -3,6 +3,8 @@ import { LoginComponent } from './login.component';
 import { Loginservice } from 'src/app/services/login/loginservice.service';
 import { Router } from '@angular/router';
 import { of, throwError } from 'rxjs';
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 class MockLoginService {
   logar(login: any) {
@@ -22,7 +24,11 @@ describe('LoginComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
       declarations: [LoginComponent],
+      schemas: [
+        CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA
+      ],
       providers: [
         { provide: Loginservice, useClass: MockLoginService },
         { provide: Router, useValue: jasmine.createSpyObj('Router', ['navigate']) },
