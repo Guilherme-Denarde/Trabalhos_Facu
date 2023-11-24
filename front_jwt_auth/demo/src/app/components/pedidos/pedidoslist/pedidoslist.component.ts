@@ -30,17 +30,21 @@ export class PedidoslistComponent {
 
 
   listAll() {
+    const token = localStorage.getItem('authToken');
+    if (!token) {
+      console.error('No token found');
+      return;
+    }
 
-    this.pedidosService.listAll().subscribe({
-      next: lista => { // QUANDO DÁ CERTO
+    this.pedidosService.listAll(token).subscribe({
+      next: lista => {
         this.lista = lista;
       },
-      error: erro => { // QUANDO DÁ ERRO
+      error: erro => {
         alert('Exemplo de tratamento de erro/exception! Observe o erro no console!');
         console.error(erro);
       }
     });
-
   }
 
   exemploErro() {

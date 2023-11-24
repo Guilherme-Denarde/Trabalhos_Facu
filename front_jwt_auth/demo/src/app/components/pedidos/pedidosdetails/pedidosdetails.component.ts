@@ -25,21 +25,15 @@ export class PedidosdetailsComponent {
   }
 
   salvar() {
-    //ISSO AQUI SERVE PARA EDITAR OU ADICIONAR... TANTO FAZ
+    const token = localStorage.getItem('authToken');
+    if (!token) {
+      console.error('No token found');
+      return;
+    }
 
-    this.pedidosService.save(this.pedido).subscribe({
-      next: pedido => { // QUANDO DÁ CERTO
-        this.retorno.emit(pedido);
-      },
-      error: erro => { // QUANDO DÁ ERRO
-        
-        alert('Exemplo de tratamento de erro/exception! Observe o erro no console!');
-        console.error(erro);
-      }
+    this.pedidosService.save(this.pedido, token).subscribe({
+      // ... Response handling ...
     });
-
-
-
   }
 
 

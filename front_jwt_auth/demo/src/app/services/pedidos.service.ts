@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Pedido } from '../models/pedido';
 
@@ -7,26 +7,28 @@ import { Pedido } from '../models/pedido';
   providedIn: 'root'
 })
 export class PedidosService {
-
   API: string = 'http://localhost:8080/api/pedido';
   http = inject(HttpClient);
 
-  constructor() { }
+  constructor() {}
 
-
-  listAll(): Observable<Pedido[]> {
-    return this.http.get<Pedido[]>(this.API);
+  listAll(token: string): Observable<Pedido[]> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get<Pedido[]>(this.API, { headers });
   }
 
-  save(pedido: Pedido): Observable<Pedido> {
-    return this.http.post<Pedido>(this.API, pedido);
+  save(pedido: Pedido, token: string): Observable<Pedido> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.post<Pedido>(this.API, pedido, { headers });
   }
 
   exemploErro(): Observable<Pedido[]> {
     return this.http.get<Pedido[]>(this.API + '/erro');
   }
-
-
 
   /*
   CASO PRECISE ENVIAR REQUEST PARAMS, BASTA DECLARAR ASSIM E INCLUIR NA REQUISIÇÃO HTTP

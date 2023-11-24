@@ -1,37 +1,38 @@
-import { CanActivateFn, Router } from '@angular/router';
-import {jwtDecode} from 'jwt-decode';
+import { Injectable } from '@angular/core';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
+import { jwtDecode } from 'jwt-decode';
 
-export const AuthGuard = (router: Router): CanActivateFn => {
-  const isAuthenticated = () => {
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthGuard implements CanActivate {
+
+  constructor(private router: Router) {}
+
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     const token = localStorage.getItem('authToken');
-    return !!token;
-  };
 
-  const redirectToPathBasedOnRole = (role: string) => {
-    if (role === 'ADMIN') {
-      router.navigate(['/admin/produtos']);
-    } else if (role === 'USER') {
-      router.navigate(['/usuario/pedidos']);
-    }
-  };
-
-  return (route, state) => {
-    if (!isAuthenticated()) {
-      router.navigate(['/login']);
+    if (!token) {
+      this.router.navigate(['/login']);
       return false;
     }
 
-    const token = localStorage.getItem('authToken');
     try {
-      const decodedToken = jwtDecode<any>(token as string); 
-      console.log(decodedToken);
+      const decodedToken = jwtDecode(token) as any;
+      const userRole = decodedToken.role;
 
-      redirectToPathBasedOnRole(decodedToken.role);
+      // Check if route is restricted by role
+      if (route.data['roles'] && route.data['roles'].indexOf(userRole) === -1) {
+        // Role not authorised so redirect to home page
+        this.router.navigate(['/']);
+        return false;
+      }
+
       return true;
     } catch (error) {
       localStorage.removeItem('authToken');
-      router.navigate(['/login']);
+      this.router.navigate(['/login']);
       return false;
     }
-  };
-};
+  }
+}

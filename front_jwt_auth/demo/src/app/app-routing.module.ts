@@ -19,7 +19,7 @@ const routes: Routes = [
     ]
   },
   {
-    path: "user", 
+    path: "usuario", 
     canActivate: [AuthGuard],
     data: { roles: ['USER'] },
     component: IndexComponent, 
