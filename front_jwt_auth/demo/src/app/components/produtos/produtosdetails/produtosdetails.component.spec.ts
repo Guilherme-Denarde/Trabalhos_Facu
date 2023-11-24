@@ -1,84 +1,99 @@
+import { FormsModule } from '@angular/forms';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
-
 import { ProdutosdetailsComponent } from './produtosdetails.component';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { Produto } from 'src/app/models/produto';
 import { By } from '@angular/platform-browser';
 import { HttpClient } from '@angular/common/http';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 
 describe('ProdutosdetailsComponent', () => {
   let component: ProdutosdetailsComponent;
   let fixture: ComponentFixture<ProdutosdetailsComponent>;
+  let httpSpy: jasmine.SpyObj<HttpClient>;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
+  beforeEach(async () => {
+    const spy = jasmine.createSpyObj('HttpClient', ['post', 'put']);
+
+    await TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule, FormsModule ],
       declarations: [ProdutosdetailsComponent],
-      schemas: [
-        CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA
-      ]
-    });
+      providers: [
+        { provide: HttpClient, useValue: spy }
+      ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
+    }).compileComponents();
+
     fixture = TestBed.createComponent(ProdutosdetailsComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    httpSpy = TestBed.inject(HttpClient) as jasmine.SpyObj<HttpClient>;
   });
 
-
-  beforeEach(() => { //MOCANDO DADOS
+  beforeEach(() => {
     let produto = new Produto();
     produto.id = 1;
     produto.nome = 'Pizza';
     produto.valor = 456;
     component.produto = produto;
-    fixture.detectChanges(); //refresh
+    fixture.detectChanges();
   });
-
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-
   it('Teste de 1 @Input - Interpolação no template', () => {
-    let elemento = fixture.debugElement.query(By.css('input[name="exampleInputText1"]'));
-    expect(elemento.nativeElement.ngModel).toEqual('Pizza');
-  });
+    component.produto.nome = 'Pizza';
+    fixture.detectChanges(); 
 
+    const inputElement = fixture.debugElement.query(By.css('input[name="exampleInputText1"]')).nativeElement;
+    expect(inputElement.value).toEqual('Pizza');
+  });
 
   it('Teste 2 de @Input - Interpolação no template', () => {
-    let elemento = fixture.debugElement.query(By.css('input[name="exampleInputText1"]'));
-    expect(elemento.nativeElement.ngModel).not.toBe(null);
+    const inputElement = fixture.debugElement.query(By.css('input[name="exampleInputText1"]')).nativeElement;
+    expect(inputElement.value).not.toBe(null);
   });
-
-
-  beforeEach(() => { //MOCANDO DADOS
-    let produto = new Produto();
-    produto.id = 1;
-    produto.nome = 'Pizza';
-    produto.valor = 456;
-
-    const httpSpy = TestBed.inject(HttpClient)
-    spyOn(httpSpy, 'post').and.returnValue(of(produto));
-    spyOn(httpSpy, 'put').and.returnValue(of(produto));
-
-    fixture.detectChanges(); //refresh
-  });
-
 
   it('Teste de @Output() retorno', fakeAsync(() => {
-    //let elemento = fixture.debugElement.query(By.css('button[name="botao"]'));
     spyOn(component.retorno, 'emit');
-    //elemento.triggerEventHandler('click', null);
+
+    httpSpy.post.and.returnValue(of(component.produto));
+
     component.salvar();
-    expect(component.retorno.emit).toHaveBeenCalled();
+    tick(); 
+
+    expect(component.retorno.emit).toHaveBeenCalledWith(component.produto);
   }));
 
+  it('should update model on input and submit form', () => {
+    const inputNome = fixture.debugElement.query(By.css('input[name="exampleInputText1"]')).nativeElement;
+    const inputValor = fixture.debugElement.query(By.css('input[name="exampleInputPassword1"]')).nativeElement;
 
+    inputNome.value = 'New Pizza';
+    inputNome.dispatchEvent(new Event('input'));
+    inputValor.value = 500;
+    inputValor.dispatchEvent(new Event('input'));
+
+    fixture.detectChanges();
+
+    fixture.debugElement.query(By.css('form')).triggerEventHandler('submit', null);
+
+    expect(component.produto.nome).toBe('New Pizza');
+    expect(component.produto.valor).toBe(500);
+  });
+
+  it('should handle errors from the API', fakeAsync(() => {
+    spyOn(window, 'alert');
+    const errorResponse = new ErrorEvent('API Error');
+    
+    httpSpy.post.and.returnValue(throwError(() => errorResponse));
+    
+    component.salvar();
+    tick();
+
+    expect(window.alert).toHaveBeenCalled();
+  }));
 
 });
-
-
-
-

@@ -1,32 +1,69 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { PedidosdetailsComponent } from './pedidosdetails.component';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
+import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { Pedido } from 'src/app/models/pedido';
+import { Produto } from 'src/app/models/produto';
+import { PedidosService } from 'src/app/services/pedidos.service';
 
 describe('PedidosdetailsComponent', () => {
   let component: PedidosdetailsComponent;
   let fixture: ComponentFixture<PedidosdetailsComponent>;
+  let httpTestingController: HttpTestingController;
+  let pedidosService: PedidosService;
+  let modalService: NgbModal;
 
-  beforeEach(() => {  //PREPARA AS DEPENDÊNCIAS INTERNAS PARA O TESTE
-
+  beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule], //SE O COMPONENTE INVOCA ALGUM SERVICE, INCLUÍMOS ESSA DEPENDÊNCIA DE HTTP DE TESTE
+      imports: [HttpClientTestingModule, NgbModule],
       declarations: [PedidosdetailsComponent],
-      schemas: [
-        CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA //PARA QUE O KARMA NÃO CONFUNDA ELEMENTOS ANGULAR NO TEMPLATE COMO ERROS
-      ]
+      providers: [PedidosService],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
     });
 
     fixture = TestBed.createComponent(PedidosdetailsComponent);
     component = fixture.componentInstance;
+    httpTestingController = TestBed.inject(HttpTestingController);
+    pedidosService = TestBed.inject(PedidosService);
+    modalService = TestBed.inject(NgbModal);
     fixture.detectChanges();
   });
 
-  it('should create', () => { //TESTE EM SI - EQUIVALE AO @TEST
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should save a pedido', () => {
+    const mockPedido = new Pedido();
+    component.pedido = mockPedido;
+    
+    component.salvar();
 
+    const req = httpTestingController.expectOne(pedidosService.API);
+    expect(req.request.method).toEqual('POST');
+    expect(req.request.body).toEqual(mockPedido);
+    req.flush(mockPedido); 
+  });
+
+  it('should add a produto to the pedido', () => {
+    const mockProduto = new Produto();
+    
+    component.retornoProdutosList(mockProduto);
+
+    expect(component.pedido.produtos).toContain(mockProduto);
+  });
+
+  it('should open a modal to add a new produto', () => {
+    spyOn(modalService, 'open').and.callThrough();
+
+    component.lancar('modalContent');
+
+    expect(modalService.open).toHaveBeenCalled();
+  });
+
+
+  afterEach(() => {
+    httpTestingController.verify(); 
+  });
 });
-
-
