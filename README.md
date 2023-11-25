@@ -2,9 +2,7 @@
 
 This repository contains various projects and files related to different topics.\
 Example:\
-git clone git@github.com:Guilherme-Denarde/Trabalhos_Facu.git \
-git branch -a\
-git checkout [BRANCH NAME]
+git clone [BRANCH NAME] git@github.com:Guilherme-Denarde/Trabalhos_Facu.git \
 
 ## Branches and Directories
 
